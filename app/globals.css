@@ -2,26 +2,159 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer base {
+  :is(a, button, input, textarea, select, details, summary):focus-visible {
+    outline: #f74780 solid 3px;
+    outline-offset: 3px;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  body {
+    font-size: clamp(1rem, 0.95594rem + 0.188vw, 1.125rem);
+    line-height: clamp(1.625rem, 1.58094rem + 0.188vw, 1.75rem);
+    font-weight: 500;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    scrollbar-color: hsla(0, 0%, 50%, 0.45) hsla(0, 0%, 50%, 0.25);
+    scrollbar-width: thin;
+
+    @apply text-steel;
+  }
+
+  /* ---------------------------------- */
+  /*             Scroll Bar             */
+  /* ---------------------------------- */
+
+  ::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: hsla(0, 0%, 50%, 0.25);
+    border-radius: 20px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsla(0, 0%, 50%, 0.45);
+    border-radius: 20px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsla(0, 0%, 50%, 0.55);
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer utilities {
+  /* --------------------------------- */
+  /*             Container             */
+  /* --------------------------------- */
+  .container {
+    padding-inline: 1rem;
+    margin-inline: auto;
+    max-width: 69.375rem;
+
+    @media screen(md) {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* ----------------------------*/
+  /*             SVG             */
+  /* ----------------------------*/
+
+  .logo {
+    width: clamp(5.5625rem, 5.01242rem + 2.347vw, 7.125rem);
+    height: clamp(2.1875rem, 1.96742rem + 0.939vw, 2.8125rem);
+  }
+
+  /* --------------------------------- */
+  /*             Gradients             */
+  /* --------------------------------- */
+
+  .gradient-secondary::before,
+  .gradient-tertiary::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+
+    z-index: -1;
+
+    transition: 0.3s opacity ease-in-out;
+  }
+
+  .gradient-secondary::before {
+    background-image: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.5) 100%
+      ),
+      linear-gradient(180deg, #ff6f48 0%, #f02aa6 100%);
+  }
+
+  .gradient-tertiary::before {
+    background-image: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.5) 0%,
+        rgba(255, 255, 255, 0.5) 100%
+      ),
+      linear-gradient(180deg, #4851ff -54.32%, #f02aa6 100%);
+  }
+
+  .gradient-secondary:hover::before,
+  .gradient-tertiary:hover::before {
+    opacity: 1;
+  }
+
+  /* ---------------------------------- */
+  /*             Typography             */
+  /* ---------------------------------- */
+
+  .hero-title {
+    font-size: clamp(2.5rem, 2.14797rem + 1.502vw, 3.5rem);
+    line-height: clamp(3rem, 2.64797rem + 1.502vw, 4rem);
+    font-weight: 800;
+  }
+
+  .stat-title {
+    font-size: clamp(0.875rem, 0.83094rem + 0.188vw, 1rem);
+    font-weight: 700;
+    line-height: 1.75rem;
+  }
+
+  .stat-value {
+    font-size: clamp(2rem, 1.82398rem + 0.751vw, 2.5rem);
+    font-weight: 800;
+  }
+
+  .btn-text {
+    font-size: clamp(1rem, 0.95594rem + 0.188vw, 1.125rem);
+    font-weight: 700;
+  }
+
+  .course-main-title {
+    font-size: clamp(1.5rem, 1.32398rem + 0.751vw, 2rem);
+    line-height: clamp(2rem, 1.82398rem + 0.751vw, 2.5rem);
+    font-weight: 800;
+  }
+
+  .course-title {
+    font-size: clamp(1.25rem, 1.16188rem + 0.376vw, 1.5rem);
+    font-weight: 800;
+  }
+
+  .course-cta {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+  }
 }
